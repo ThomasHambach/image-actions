@@ -71,13 +71,13 @@ const processImages = async () => {
         compressionWasSignificant
       });
       
-      if(extension !== 'webp') {
+      if(extension !== '.webp') {
         const { webpdata, webpinfo } = await sharp(imgPath)
           .toFormat('webp', config['webp'])
           .toBuffer({ resolveWithObject: true });
-        const webppath = imgPath.replace('.' + extension, '.webp');
+        const webppath = imgPath.replace(extension, '.webp');
         console.log(
-          "    - Processing:",
+          "    - Creating WebP:",
           webppath,
           `config=${JSON.stringify(options)}`,
           `output=${JSON.stringify(webpinfo)}`
