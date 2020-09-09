@@ -70,6 +70,22 @@ const processImages = async () => {
         percentChange,
         compressionWasSignificant
       });
+      
+      if(extension !== 'webp') {
+        const { webpdata, webpinfo } = await sharp(imgPath)
+          .toFormat('webp', config['webp'])
+          .toBuffer({ resolveWithObject: true });
+        const webppath = imgPath.replace('.' + extension, '.webp');
+        console.log(
+          "    - Processing:",
+          webppath,
+          `config=${JSON.stringify(options)}`,
+          `output=${JSON.stringify(webpinfo)}`
+        );
+
+        await fs.writeFile(webppath, webpdata);
+      }
+      
     } catch (e) {
       console.error("::error:: ", e, imgPath);
       continue;
