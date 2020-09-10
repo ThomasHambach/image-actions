@@ -79,7 +79,7 @@ const processImages = async () => {
           .toFile(webppath);
         
         console.log(
-          "    - Creating WebP from ",
+          "    - WebP from ",
           imgPath,
           " to ",
           webppath,
