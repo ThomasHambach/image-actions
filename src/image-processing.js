@@ -86,7 +86,6 @@ const processImages = async () => {
           `config=${JSON.stringify(config['webp'])}`
         );
 
-        await fs.writeFile(webppath, webpdata);
       }
       
     } catch (e) {
