@@ -72,15 +72,18 @@ const processImages = async () => {
       });
       
       if(extension !== '.webp') {
-        const { webpdata, webpinfo } = await sharp(imgPath)
-          .toFormat('webp', config['webp'])
-          .toBuffer({ resolveWithObject: true });
         const webppath = imgPath.replace(extension, '.webp');
+        await sharp(imgPath)
+          .toFormat('webp')
+          .webp(config['webp'])
+          .toFile(webppath);
+        
         console.log(
-          "    - Creating WebP:",
+          "    - Creating WebP from ",
+          imgPath,
+          " to ",
           webppath,
-          `config=${JSON.stringify(options)}`,
-          `output=${JSON.stringify(webpinfo)}`
+          `config=${JSON.stringify(config['webp'])}`
         );
 
         await fs.writeFile(webppath, webpdata);
